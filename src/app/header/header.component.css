@@ -1,0 +1,15 @@
+.toolbar-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #263238;
+    
+  }
+  
+ .spacer {
+  flex: 1 1 auto;
+}  
+.mat-toolbar .mat-mdc-button-base.mat-mdc-button-base.mat-unthemed {
+  --mdc-text-button-label-text-color: #ffffff;
+  --mdc-outlined-button-label-text-color: var(--mat-toolbar-container-text-color);
+}

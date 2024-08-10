@@ -1,0 +1,19 @@
+<mat-toolbar color="primary">
+    <mat-toolbar-row class="toolbar-row" >
+      <button mat-icon-button>
+        <mat-icon>menu</mat-icon>
+      </button>
+      <div class="spacer"></div>
+      <button mat-button [matMenuTriggerFor]="userMenu">
+        user name
+        <mat-icon>keyboard_arrow_down</mat-icon>
+      </button>
+      <mat-menu #userMenu="matMenu">
+        <button (click)="logout()" mat-menu-item>
+          <mat-icon>exit_to_app</mat-icon>
+          Logout
+        </button>
+      </mat-menu>
+    </mat-toolbar-row>
+  </mat-toolbar>
+  

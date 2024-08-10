@@ -1,0 +1,42 @@
+
+<div class="parent">
+
+    <div class=" container-login mx-auto">
+      <div class="signin-form">
+        <h2>Admin Login</h2>
+        <form [formGroup]="LoginForm">
+          <div class="input-group">
+            <label for="email">email</label>
+            <input type="text" formControlName="email" id="email" name="email" placeholder="enter email ">
+  
+            <div class="text-danger">
+              @if (LoginForm.controls['email'].touched&&LoginForm.controls['email'].errors?.['required']) {
+              <span>this is required</span>
+              }
+              @else if (LoginForm.controls['email'].touched&&LoginForm.controls['email'].errors?.['email']) {
+              <span>enter proper email</span>
+  
+              }
+            </div>
+          </div>
+          <div class="input-group">
+            <label for="password">Password</label>
+            <input type="password" formControlName="password" id="password" name="password" placeholder="enter password">
+            <div class="text-danger">
+              @if (LoginForm.controls['password'].touched&&LoginForm.controls['password'].errors?.['required']) {
+              <span>this is required</span>
+              }
+              @else if (LoginForm.controls['password'].touched&&LoginForm.controls['password'].errors?.['minlength']) {
+              <span>password should be 8 char</span>
+              }
+            </div>
+          
+  
+          </div>
+          <button type="button" (click)="onLogin()">Login</button>
+        </form>
+      </div>
+    </div>
+  </div>
+   
+   
