@@ -77,6 +77,7 @@ export class LoginComponent {
 
             // Display a success message
             alert('Login successful');
+            //some random comment
 
             // Navigate to a different route if authenticated
             this.router.navigate(['/layout']);
