@@ -26,10 +26,10 @@
           <div class="text-danger">
             <!-- Check if the email field is touched and has validation errors -->
             @if (LoginForm.controls['email'].touched && LoginForm.controls['email'].errors?.['required']) {
-              <span>This is required</span> <!-- Error message for required email field -->
+            <span>This is required</span> <!-- Error message for required email field -->
             }
             @else if (LoginForm.controls['email'].touched && LoginForm.controls['email'].errors?.['email']) {
-              <span>Enter a proper email</span> <!-- Error message for invalid email format -->
+            <span>Enter a proper email</span> <!-- Error message for invalid email format -->
             }
           </div>
         </div>
@@ -47,10 +47,10 @@
           <div class="text-danger">
             <!-- Check if the password field is touched and has validation errors -->
             @if (LoginForm.controls['password'].touched && LoginForm.controls['password'].errors?.['required']) {
-              <span>This is required</span> <!-- Error message for required password field -->
+            <span>This is required</span> <!-- Error message for required password field -->
             }
             @else if (LoginForm.controls['password'].touched && LoginForm.controls['password'].errors?.['minlength']) {
-              <span>Password should be at least 8 characters</span> <!-- Error message for password length -->
+            <span>Password should be at least 8 characters</span> <!-- Error message for password length -->
             }
           </div>
         </div>

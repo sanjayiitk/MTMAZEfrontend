@@ -2,7 +2,28 @@ import { Component } from '@angular/core';
 import { FormControl, FormGroup, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterOutlet } from '@angular/router';
 import { HttpClient, HttpClientModule } from '@angular/common/http';
-import { error } from 'node:console';
+
+// Define an interface for the user data structure
+interface UserData {
+  id: number;
+  firstName: string;
+  middleName: string;
+  lastName: string;
+  email: string;
+  password: string;
+  mobileNo: string;
+  presentAddressId: number;
+  permanentAddressId: number;
+  role: string;
+}
+
+// Define an interface for the login response structure
+interface LoginResponse {
+  statusCode: number;
+  success: boolean;
+  message: string;
+  data: UserData;
+}
 
 @Component({
   selector: 'app-login',
@@ -18,19 +39,17 @@ export class LoginComponent {
   // Definition of the form group with controls and validation rules
   LoginForm: FormGroup = new FormGroup({
     // Form control for email with required and email format validation
-    email: new FormControl("", [Validators.required, Validators.email]),
+    email: new FormControl('', [Validators.required, Validators.email]),
     // Form control for password with required and minimum length validation
-    password: new FormControl("", [Validators.required, Validators.minLength(8)])
+    password: new FormControl('', [Validators.required, Validators.minLength(8)])
   });
 
   // Constructor to inject dependencies
   constructor(private router: Router, private http: HttpClient) { }
 
   // Method to handle login action
-  onLogin() {
-
-    // Log message indicating the login button was clicked
-    console.log("Login button clicked");
+  onLogin(): void {
+    console.log('Login button clicked');
 
     // Check if the form is valid before making the HTTP request
     if (this.LoginForm.valid) {
@@ -38,32 +57,49 @@ export class LoginComponent {
       this.formValue = this.LoginForm.value;
 
       // Make a POST request to the login endpoint with form values
-      this.http.post('http://localhost:8080/login', this.formValue).subscribe(
-        response => {
+      this.http.post<LoginResponse>('http://localhost:8080/login', this.formValue).subscribe(
+        (response: LoginResponse) => {
           // Log the response from the server
-          console.log("Response from server:", response);
-          // Display a success message
-          alert("Login successful");
-          // Example of authentication check (hardcoded for demonstration)
-          const isAuthenticated = true;
+          console.log('Response from server:', response);
 
-          // Navigate to a different route if authenticated
-          if (isAuthenticated) {
+          // Check if the login was successful
+          if (response.success) {
+            // Extract user data from the response
+            const userData: UserData = response.data;
+            // Generate the username from the user data
+            const username: string = this.generateUsername(userData);
+
+            // Log the username of the logged-in user
+            console.log('Logged in user:', username);
+
+            // Display a success message
+            alert('Login successful');
+
+            // Navigate to a different route if authenticated
             this.router.navigate(['/layout']);
+          } else {
+            // Display a failure message if login was not successful
+            alert('Login failed');
           }
         },
-        error => {
+        (error: any) => {
           // Log the error from the server
-          console.error("Error from server:", error);
-          // Display a failure message
-          alert("Login failed");
+          console.error('Error from server:', error);
+          // Display a failure message in case of an error
+          alert('Login failed');
         }
       );
     } else {
-      // Log message if the form is invalid
-      console.log("Form is invalid");
-      // Display a message prompting user to correct the form
-      alert("Please fill out the form correctly.");
+      // Log a message if the form is invalid
+      console.log('Form is invalid');
+      // Display a message prompting the user to correct the form
+      alert('Please fill out the form correctly.');
     }
+  }
+
+  // Helper method to generate the username of the user
+  private generateUsername(user: UserData): string {
+    // Combine the first name, middle initial (if present), and last name to create a username
+    return `${user.firstName}${user.middleName ? '.' + user.middleName[0] + '.' : ''}${user.lastName}`;
   }
 }
