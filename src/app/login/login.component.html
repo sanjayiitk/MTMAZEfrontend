@@ -1,42 +1,63 @@
-
+<!-- Parent container for centering the login form -->
 <div class="parent">
 
-    <div class=" container-login mx-auto">
-      <div class="signin-form">
-        <h2>Admin Login</h2>
-        <form [formGroup]="LoginForm">
-          <div class="input-group">
-            <label for="email">email</label>
-            <input type="text" formControlName="email" id="email" name="email" placeholder="enter email ">
-  
-            <div class="text-danger">
-              @if (LoginForm.controls['email'].touched&&LoginForm.controls['email'].errors?.['required']) {
-              <span>this is required</span>
-              }
-              @else if (LoginForm.controls['email'].touched&&LoginForm.controls['email'].errors?.['email']) {
-              <span>enter proper email</span>
-  
-              }
-            </div>
+  <!-- Container for the login form with centered alignment -->
+  <div class="container-login mx-auto">
+
+    <!-- Wrapper for the sign-in form -->
+    <div class="signin-form">
+
+      <!-- Heading for the form -->
+      <h2>Admin Login</h2>
+
+      <!-- Angular form group for binding form controls -->
+      <form [formGroup]="LoginForm">
+
+        <!-- Input group for the email field -->
+        <div class="input-group">
+
+          <!-- Label for the email input field -->
+          <label for="email">Email</label>
+
+          <!-- Email input field with Angular form control binding -->
+          <input type="text" formControlName="email" id="email" name="email" placeholder="Enter email">
+
+          <!-- Error messages for the email field -->
+          <div class="text-danger">
+            <!-- Check if the email field is touched and has validation errors -->
+            @if (LoginForm.controls['email'].touched && LoginForm.controls['email'].errors?.['required']) {
+              <span>This is required</span> <!-- Error message for required email field -->
+            }
+            @else if (LoginForm.controls['email'].touched && LoginForm.controls['email'].errors?.['email']) {
+              <span>Enter a proper email</span> <!-- Error message for invalid email format -->
+            }
           </div>
-          <div class="input-group">
-            <label for="password">Password</label>
-            <input type="password" formControlName="password" id="password" name="password" placeholder="enter password">
-            <div class="text-danger">
-              @if (LoginForm.controls['password'].touched&&LoginForm.controls['password'].errors?.['required']) {
-              <span>this is required</span>
-              }
-              @else if (LoginForm.controls['password'].touched&&LoginForm.controls['password'].errors?.['minlength']) {
-              <span>password should be 8 char</span>
-              }
-            </div>
-          
-  
+        </div>
+
+        <!-- Input group for the password field -->
+        <div class="input-group">
+
+          <!-- Label for the password input field -->
+          <label for="password">Password</label>
+
+          <!-- Password input field with Angular form control binding -->
+          <input type="password" formControlName="password" id="password" name="password" placeholder="Enter password">
+
+          <!-- Error messages for the password field -->
+          <div class="text-danger">
+            <!-- Check if the password field is touched and has validation errors -->
+            @if (LoginForm.controls['password'].touched && LoginForm.controls['password'].errors?.['required']) {
+              <span>This is required</span> <!-- Error message for required password field -->
+            }
+            @else if (LoginForm.controls['password'].touched && LoginForm.controls['password'].errors?.['minlength']) {
+              <span>Password should be at least 8 characters</span> <!-- Error message for password length -->
+            }
           </div>
-          <button type="button" (click)="onLogin()">Login</button>
-        </form>
-      </div>
+        </div>
+
+        <!-- Login button -->
+        <button type="button" (click)="onLogin()">Login</button>
+      </form>
     </div>
   </div>
-   
-   
+</div>
