@@ -1,19 +1,27 @@
 <mat-toolbar color="primary">
-    <mat-toolbar-row class="toolbar-row" >
-      <button mat-icon-button>
-        <mat-icon>menu</mat-icon>
+  <mat-toolbar-row class="toolbar-row">
+    <!-- Menu button for side navigation -->
+    <button mat-icon-button>
+      <mat-icon>menu</mat-icon>
+    </button>
+
+    <!-- Spacer to push the username button to the right -->
+    <div class="spacer"></div>
+
+    <!-- Button displaying the username and triggering the menu -->
+    <button mat-button [matMenuTriggerFor]="userMenu">
+      <!-- Display the username dynamically -->
+      {{ username || 'User Name' }} <!-- Fallback text if username is not available -->
+      <mat-icon>keyboard_arrow_down</mat-icon>
+    </button>
+
+    <!-- Menu for user actions -->
+    <mat-menu #userMenu="matMenu">
+      <!-- Logout button inside the menu -->
+      <button (click)="logout()" mat-menu-item>
+        <mat-icon>exit_to_app</mat-icon>
+        Logout
       </button>
-      <div class="spacer"></div>
-      <button mat-button [matMenuTriggerFor]="userMenu">
-        user name
-        <mat-icon>keyboard_arrow_down</mat-icon>
-      </button>
-      <mat-menu #userMenu="matMenu">
-        <button (click)="logout()" mat-menu-item>
-          <mat-icon>exit_to_app</mat-icon>
-          Logout
-        </button>
-      </mat-menu>
-    </mat-toolbar-row>
-  </mat-toolbar>
-  
+    </mat-menu>
+  </mat-toolbar-row>
+</mat-toolbar>

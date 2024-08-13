@@ -69,6 +69,9 @@ export class LoginComponent {
             // Generate the username from the user data
             const username: string = this.generateUsername(userData);
 
+             // Store the username in localStorage
+             localStorage.setItem('username', username);
+
             // Log the username of the logged-in user
             console.log('Logged in user:', username);
 
