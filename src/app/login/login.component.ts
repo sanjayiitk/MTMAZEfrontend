@@ -103,6 +103,6 @@ export class LoginComponent {
   // Helper method to generate the username of the user
   private generateUsername(user: UserData): string {
     // Combine the first name, middle initial (if present), and last name to create a username
-    return `${user.firstName}${user.middleName ? '.' + user.middleName[0] + '.' : ''}${user.lastName}`;
+    return `${user.firstName}${user.middleName ? '_' + user.middleName + '_' : ''}${user.lastName}`;
   }
 }
